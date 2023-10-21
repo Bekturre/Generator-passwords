@@ -1,29 +1,98 @@
 
-
-
 import 'dart:io';
-import 'dart:math';
 
 void main(){
-password();
+photofunc();
 }
 
-void password(){
-String str ='2392909932039029';
-String password = '';
-print('из скольки символов должен состоять пароль? \n4\n6\n8\n10\n12');
-int passlength = int.parse(stdin.readLineSync()?? '');
-if(passlength!= 4 && 
-passlength!= 6 && 
-passlength!= 8 && 
-passlength!= 10 && 
-passlength!= 12  ){
-  print('Неправильная длина пароля.  Выберите \n4\n6\n8\n10\n12');
-  return;
+
+nalogfunc(){
+print("Введите сумму дохода: ");
+  var doxod = double.tryParse(stdin.readLineSync()!) ?? 0;
+
+  double taxPercentage;
+  switch (doxod) {
+    case double.infinity:
+      taxPercentage = 0.12;
+     break;
+    default:
+    if (doxod <= 10000) {
+        taxPercentage = 0;
+      } else if (doxod <= 50000) {
+        taxPercentage = 0.1;
+      } else {
+        taxPercentage = 0.12;
+        
+      }
+  }
+
+  var tax = doxod * taxPercentage;
+  print("Сумма налога на доход: $tax");
 }
-for (int i = 1; i<=passlength; i++){
-  int randomIndex = Random().nextInt(str.length);
-  password += str[randomIndex];
+
+
+
+
+
+calcfunc(){
+ print("Введите первое число: ");
+  var num1 = int.tryParse(stdin.readLineSync()!) ?? 0;
+  
+  print("Введите (+, -, *, /): ");
+  var znak = stdin.readLineSync()!;
+  
+  print("Введите второе число: ");
+  var num2 = double
+  .tryParse(stdin.readLineSync()!) ?? 0;
+
+  double result;
+  switch (znak) {
+    case '+':
+      result = num1 + num2;
+      break;
+    case '-':
+      result = num1 - num2;
+      break;
+    case '*':
+      result = num1 * num2;
+      break;
+    case '/':
+      if (num2 != 0) {
+        result = num1 / num2;
+      } else {
+        print("Ошибка: деление на ноль.");
+        return;
+      }
+      break;
+    default:
+      return;
+  }
+  print("Результат: $result");
 }
-print(password);
+
+
+
+
+
+void photofunc() {
+  print("Введите расширение файла  '.txt', '.jpg', '.pdf': ");
+  var choice = stdin.readLineSync()!.toLowerCase();
+
+  String fileType;
+  switch (choice) {
+    case '.txt':
+      fileType = "Текстовый файл";
+      break;
+    case '.jpg':
+     fileType = "Изображение";
+      break;
+    case '.pdf':
+      fileType = "Документ";
+      break;
+    default:
+      fileType = "Неизвестный тип файла";
+      break;
+  }
+  print("Тип файла: $fileType");
 }
+
